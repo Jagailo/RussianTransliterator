@@ -13,6 +13,7 @@ Supported languages: Russian.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://github.com/Jagailo/RussianTransliterator/raw/master/RussianTransliterator/logo.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
