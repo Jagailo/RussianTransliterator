@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Jagailo</Authors>
+    <Company />
+    <PackageTags>transliterator translit transliteration cyrillic slavic russian</PackageTags>
+    <Copyright>Copyright (c) 2019 Alexey Yagelo</Copyright>
+    <Description>Library for transliterating the cyrillic to latin.
+Supported languages: Russian.</Description>
+    <RepositoryUrl>https://github.com/Jagailo/RussianTransliterator</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Jagailo/RussianTransliterator</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://github.com/Jagailo/RussianTransliterator/raw/master/RussianTransliterator/logo.png</PackageIconUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>
