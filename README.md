@@ -6,7 +6,7 @@
 .NET library for transliterating the cyrillic to latin. Only Russian language is supported.
 
 # Installation
-NuGet:
+[NuGet](https://www.nuget.org/packages/RussianTransliterator/):
 ```
 Install-Package RussianTransliterator
 ```
