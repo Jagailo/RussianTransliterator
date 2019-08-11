@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace RussianTransliterator
+namespace RussianTransliteration
 {
     /// <summary>
     /// Cyrillic transliterator to latin
