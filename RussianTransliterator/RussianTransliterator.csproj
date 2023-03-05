@@ -22,17 +22,15 @@
     <Title>RussianTransliterator</Title>
     <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Updated to .NET Standard 2.1</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\README.md">
+    <None Update="logo.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="logo.png">
+    <None Update="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
