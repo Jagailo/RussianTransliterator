@@ -5,13 +5,13 @@ using System.Text;
 namespace RussianTransliteration
 {
     /// <summary>
-    /// Cyrillic transliterator to latin
+    /// Cyrillic transliterator to latin.
     /// </summary>
     public static class RussianTransliterator
     {
         #region Fields
 
-        private static readonly Dictionary<string, string> vowelCombinations = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> VowelCombinations = new Dictionary<string, string>
         {
             { "Ай", "Ay" },
             { "aЙ", "aY" },
@@ -51,7 +51,7 @@ namespace RussianTransliteration
             { "ЭЙ", "EY" }
         };
 
-        private static readonly Dictionary<char, char> singleLetters = new Dictionary<char, char>
+        private static readonly Dictionary<char, char> SingleLetters = new Dictionary<char, char>
         {
             { 'а', 'a' },
             { 'б', 'b' },
@@ -78,7 +78,7 @@ namespace RussianTransliteration
             { 'э', 'e' }
         };
 
-        private static readonly Dictionary<string, string> doubleLetters = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> DoubleLetters = new Dictionary<string, string>
         {
             { "ж", "zh" },
             { "х", "kh" },
@@ -90,7 +90,7 @@ namespace RussianTransliteration
             { "я", "ya" }
         };
 
-        private static readonly char[] vowelsLetters = { 'а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я' };
+        private static readonly char[] VowelsLetters = { 'а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я' };
 
         #endregion
 
@@ -99,8 +99,8 @@ namespace RussianTransliteration
         /// <summary>
         /// Converts the specified cyrillic string to latin string.
         /// </summary>
-        /// <param name="value">Cyrillic string</param>
-        /// <returns>Latin string</returns>
+        /// <param name="value">Cyrillic string.</param>
+        /// <returns>Latin string.</returns>
         public static string GetTransliteration(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -115,7 +115,7 @@ namespace RussianTransliteration
             // Рх... -> Rkh...
             for (var i = 1; i < builder.Length; i++)
             {
-                if (char.ToLower(builder[i]) == 'х' && vowelsLetters.Contains(char.ToLower(builder[i - 1])))
+                if (char.ToLower(builder[i]) == 'х' && VowelsLetters.Contains(char.ToLower(builder[i - 1])))
                 {
                     builder[i] = char.IsLower(builder[i]) ? 'h' : 'H';
                 }
@@ -128,7 +128,7 @@ namespace RussianTransliteration
             builder.Replace("Ъ", string.Empty);
 
             // Replacing vowel combinations with the letter 'й'
-            foreach (var combination in vowelCombinations)
+            foreach (var combination in VowelCombinations)
             {
                 builder.Replace(combination.Key, combination.Value);
             }
@@ -137,7 +137,7 @@ namespace RussianTransliteration
             // ЯГА -> YAGA not ЯГА -> YaGA
             for (var i = 0; i < builder.Length; i++)
             {
-                foreach (var letter in doubleLetters)
+                foreach (var letter in DoubleLetters)
                 {
                     if (builder[i].ToString().Equals(letter.Key.ToUpper()) && (i < builder.Length - 1 && char.IsLetter(builder[i + 1]) && char.IsUpper(builder[i + 1]) || i == builder.Length - 1))
                     {
@@ -148,7 +148,7 @@ namespace RussianTransliteration
             }
 
             // Replacing single letters
-            foreach (var letter in singleLetters)
+            foreach (var letter in SingleLetters)
             {
                 builder.Replace(letter.Key, letter.Value);
                 builder.Replace(char.ToUpper(letter.Key), char.ToUpper(letter.Value));
@@ -156,10 +156,10 @@ namespace RussianTransliteration
 
             // Replacing double letters with a single letter in uppercase
             // Яга -> Yaga not Яга -> YAga
-            foreach (var letter in doubleLetters)
+            foreach (var letter in DoubleLetters)
             {
                 builder.Replace(letter.Key, letter.Value);
-                builder.Replace(letter.Key.ToUpper(), $"{char.ToUpper(letter.Value[0])}{letter.Value.Substring(1)}");
+                builder.Replace(letter.Key.ToUpper(), $"{char.ToUpper(letter.Value[0])}{letter.Value[1..]}");
             }
 
             return builder.ToString();

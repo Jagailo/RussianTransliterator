@@ -1,24 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>RussianTransliteration</AssemblyName>
     <RootNamespace>RussianTransliteration</RootNamespace>
     <Authors>Jagailo</Authors>
     <Company />
     <PackageTags>transliterator translit transliteration cyrillic slavic russian</PackageTags>
-    <Copyright>Copyright (c) 2019 Alexey Yagelo</Copyright>
-    <Description>Library for transliterating the cyrillic to latin.
-Only Russian language is supported.</Description>
+    <Copyright>Copyright (c) 2023 Alexey Yagelo</Copyright>
+    <Description>Library for transliterating the cyrillic to latin. Only Russian language is supported.</Description>
     <RepositoryUrl>https://github.com/Jagailo/RussianTransliterator.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Jagailo/RussianTransliterator</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://github.com/Jagailo/RussianTransliterator/raw/master/RussianTransliterator/logo.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.1.1</Version>
     <PackageId>RussianTransliterator</PackageId>
     <Product>RussianTransliterator</Product>
+    <Nullable>enable</Nullable>
+    <Title>RussianTransliterator</Title>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
