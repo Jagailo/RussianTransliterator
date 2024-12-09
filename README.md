@@ -1,7 +1,7 @@
 # Russian Transliterator
 
-[![License](https://img.shields.io/badge/license-MIT-red.svg)](https://raw.githubusercontent.com/nick-buhro/Translit/master/LICENSE)
-[![NuGet Badge](https://buildstats.info/nuget/RussianTransliterator)](https://www.nuget.org/packages/RussianTransliterator/)
+![GitHub License](https://img.shields.io/github/license/Jagailo/RussianTransliterator)
+![NuGet Downloads](https://img.shields.io/nuget/dt/RussianTransliterator?label=NuGet%20downloads)
 
 .NET library for transliterating the cyrillic to latin. Only Russian language is supported.
 
