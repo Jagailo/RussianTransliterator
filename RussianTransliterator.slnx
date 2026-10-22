@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/solution items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/RussianTransliterator/RussianTransliterator.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/RussianTransliterator.Tests/RussianTransliterator.Tests.csproj" />
+  </Folder>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/RussianTransliterator.Benchmarks/RussianTransliterator.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/playground/">
+    <Project Path="playground/RussianTransliterator.Playground/RussianTransliterator.Playground.csproj" />
+  </Folder>
+</Solution>

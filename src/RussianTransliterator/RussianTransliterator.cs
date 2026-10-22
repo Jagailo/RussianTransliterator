@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
 namespace RussianTransliteration
 {
     /// <summary>
-    /// Cyrillic transliterator to latin.
+    /// Transliterates Russian Cyrillic text to the Latin alphabet.
     /// </summary>
     public static class RussianTransliterator
     {
         #region Fields
 
-        private static readonly Dictionary<string, string> VowelCombinations = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> VowelCombinations = new()
         {
             { "Ай", "Ay" },
-            { "aЙ", "aY" },
+            { "аЙ", "aY" },
             { "ай", "ay" },
             { "АЙ", "AY" },
             { "Ей", "Ey" },
@@ -51,7 +53,7 @@ namespace RussianTransliteration
             { "ЭЙ", "EY" }
         };
 
-        private static readonly Dictionary<char, char> SingleLetters = new Dictionary<char, char>
+        private static readonly Dictionary<char, char> SingleLetters = new()
         {
             { 'а', 'a' },
             { 'б', 'b' },
@@ -78,7 +80,7 @@ namespace RussianTransliteration
             { 'э', 'e' }
         };
 
-        private static readonly Dictionary<string, string> DoubleLetters = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> DoubleLetters = new()
         {
             { "ж", "zh" },
             { "х", "kh" },
@@ -90,18 +92,30 @@ namespace RussianTransliteration
             { "я", "ya" }
         };
 
-        private static readonly char[] VowelsLetters = { 'а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я' };
+        private static readonly char[] VowelLetters = [ 'а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я' ];
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Converts the specified cyrillic string to latin string.
+        /// Transliterates the specified Russian Cyrillic text to the Latin alphabet.
         /// </summary>
-        /// <param name="value">Cyrillic string.</param>
-        /// <returns>Latin string.</returns>
-        public static string GetTransliteration(string value)
+        /// <remarks>This method is obsolete. Use <see cref="ToLatin"/> instead.</remarks>
+        /// <param name="value">The text to transliterate.</param>
+        /// <returns>The transliterated text, or <see langword="null"/> if <paramref name="value"/> is <see langword="null"/>.</returns>
+        [Obsolete("Use " + nameof(ToLatin) + " instead.")]
+        [return: NotNullIfNotNull(nameof(value))]
+        public static string? GetTransliteration(string? value) => ToLatin(value);
+
+        /// <summary>
+        /// Transliterates the specified Russian Cyrillic text to the Latin alphabet.
+        /// </summary>
+        /// <remarks>Letter case is preserved. Characters other than Russian Cyrillic letters are left unchanged.</remarks>
+        /// <param name="value">The text to transliterate.</param>
+        /// <returns>The transliterated text, or <see langword="null"/> if <paramref name="value"/> is <see langword="null"/>.</returns>
+        [return: NotNullIfNotNull(nameof(value))]
+        public static string? ToLatin(this string? value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -110,31 +124,31 @@ namespace RussianTransliteration
 
             var builder = new StringBuilder(value);
 
-            // 'х' = 'h' if standing after vowels
+            // 'х' becomes 'h' after a vowel
             // Ах... -> Ah...
             // Рх... -> Rkh...
             for (var i = 1; i < builder.Length; i++)
             {
-                if (char.ToLower(builder[i]) == 'х' && VowelsLetters.Contains(char.ToLower(builder[i - 1])))
+                if (char.ToLower(builder[i]) == 'х' && VowelLetters.Contains(char.ToLower(builder[i - 1])))
                 {
                     builder[i] = char.IsLower(builder[i]) ? 'h' : 'H';
                 }
             }
 
-            // Removing the unpronounceable letters
+            // Removing the soft and hard signs
             builder.Replace("ь", string.Empty);
             builder.Replace("Ь", string.Empty);
             builder.Replace("ъ", string.Empty);
             builder.Replace("Ъ", string.Empty);
 
-            // Replacing vowel combinations with the letter 'й'
+            // Replacing combinations of a vowel followed by 'й'
             foreach (var combination in VowelCombinations)
             {
                 builder.Replace(combination.Key, combination.Value);
             }
 
-            // Uppercase for cyrillic letters with 2+ latin letters
-            // ЯГА -> YAGA not ЯГА -> YaGA
+            // Uppercase letters that map to several Latin letters are fully uppercased inside uppercase words
+            // ЯГА -> YAGA, not YaGA
             for (var i = 0; i < builder.Length; i++)
             {
                 foreach (var letter in DoubleLetters)
@@ -154,12 +168,12 @@ namespace RussianTransliteration
                 builder.Replace(char.ToUpper(letter.Key), char.ToUpper(letter.Value));
             }
 
-            // Replacing double letters with a single letter in uppercase
-            // Яга -> Yaga not Яга -> YAga
+            // Replacing the remaining letters that map to several Latin letters, capitalizing only the first one
+            // Яга -> Yaga, not YAga
             foreach (var letter in DoubleLetters)
             {
                 builder.Replace(letter.Key, letter.Value);
-                builder.Replace(letter.Key.ToUpper(), $"{char.ToUpper(letter.Value[0])}{letter.Value[1..]}");
+                builder.Replace(letter.Key.ToUpper(), $"{char.ToUpper(letter.Value[0])}{letter.Value.Substring(1)}");
             }
 
             return builder.ToString();

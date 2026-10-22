@@ -13,7 +13,9 @@ Install-Package RussianTransliterator
 
 # Usage
 ```CSharp
-var latin = RussianTransliterator.GetTransliteration("Какой-нибудь русский текст");
+var latin = RussianTransliterator.ToLatin("Какой-нибудь русский текст");
+// or
+var latin = "Какой-нибудь русский текст".ToLatin();
 ```
 
 # Examples

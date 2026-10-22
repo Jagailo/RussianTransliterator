@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+    <IsPackable>false</IsPackable>
+    <Authors>Jagailo</Authors>
+    <Copyright>Copyright (c) 2019 Alexey Yagelo</Copyright>
+  </PropertyGroup>
+
+</Project>
