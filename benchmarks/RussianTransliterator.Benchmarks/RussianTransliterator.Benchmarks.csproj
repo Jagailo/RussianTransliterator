@@ -14,4 +14,8 @@
     <PackageReference Include="BenchmarkDotNet" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Voyna i mir.txt" LogicalName="Voyna i mir.txt" />
+  </ItemGroup>
+
 </Project>

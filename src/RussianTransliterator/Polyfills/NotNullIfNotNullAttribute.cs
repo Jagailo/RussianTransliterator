@@ -14,7 +14,10 @@ namespace System.Diagnostics.CodeAnalysis
     {
         #region Constructors
 
-        public NotNullIfNotNullAttribute(string parameterName) => ParameterName = parameterName;
+        public NotNullIfNotNullAttribute(string parameterName)
+        {
+            ParameterName = parameterName;
+        }
 
         #endregion
 
