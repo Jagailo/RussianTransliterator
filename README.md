@@ -73,17 +73,19 @@ var latin = "Какой-нибудь русский текст".ToLatin();
 
 ## Rules
 
-| Russian | Latin  | Russian | Latin | Russian | Latin | Russian | Latin |
-|---------|--------|---------|-------|---------|-------|---------|-------|
-| а       | a      | и       | i     | р       | r     | ш       | sh    |
-| б       | b      | й       | y     | с       | s     | щ       | shch  |
-| в       | v      | к       | k     | т       | t     | ъ       |       |
-| г       | g      | л       | l     | у       | u     | ы       | y     |
-| д       | d      | м       | m     | ф       | f     | ь       |       |
-| е       | e      | н       | n     | х       | kh    | э       | e     |
-| ё       | e      | о       | o     | ц       | ts    | ю       | yu    |
-| ж       | zh     | п       | p     | ч       | ch    | я       | ya    |
-| з       | z      |         |       |         |       |         |       |
+| Russian | Latin | Russian | Latin | Russian | Latin |
+|---------|-------|---------|-------|---------|-------|
+| а       | a     | к       | k     | х       | kh    |
+| б       | b     | л       | l     | ц       | ts    |
+| в       | v     | м       | m     | ч       | ch    |
+| г       | g     | н       | n     | ш       | sh    |
+| д       | d     | о       | o     | щ       | shch  |
+| е       | e     | п       | p     | ъ       |       |
+| ё       | e     | р       | r     | ы       | y     |
+| ж       | zh    | с       | s     | ь       |       |
+| з       | z     | т       | t     | э       | e     |
+| и       | i     | у       | u     | ю       | yu    |
+| й       | y     | ф       | f     | я       | ya    |
 
 Special rules:
 
@@ -95,13 +97,13 @@ Special rules:
 
 Time and memory for one `ToLatin` call, measured with [BenchmarkDotNet](https://benchmarkdotnet.org/) on AMD Ryzen 7 7800X3D:
 
-| Text                                                                                                                 | Characters |   .NET 10 | .NET Framework 4.8 | Memory  |
-|----------------------------------------------------------------------------------------------------------------------|-----------:|----------:|-------------------:|--------:|
-| `Как выбрать тариф ЖКХ в 2026 году: советы и примеры`                                                                |         51 | 104.62 ns |          218.02 ns |   320 B |
-| `КАК ВЫБРАТЬ ТАРИФ ЖКХ В 2026 ГОДУ: СОВЕТЫ И ПРИМЕРЫ`                                                                |         51 | 123.62 ns |          327.82 ns |   320 B |
-| `Архив ЮРИДИЧЕСКИЙ отдел ЖКХ Щёлково ОХРАНА ТРУДА Счета и ПЛАТЁЖ за Январь–Июнь 2026 (Шаблоны ЦЕНЫ v2) ИТОГОВЫЙ.zip` |        114 | 304.44 ns |          717.22 ns |   600 B |
-| `How to choose a utility tariff in 2026: tips and examples`                                                          |         57 |  18.78 ns |           24.53 ns |     0 B |
-| The full text of the novel "War and Peace"                                                                           |  3,606,380 |  15.07 ms |           20.32 ms | 14.9 MB |
+| Text                                                                                                                 | Characters |   .NET&nbsp;10 | .NET&nbsp;Framework&nbsp;4.8 |       Memory |
+|----------------------------------------------------------------------------------------------------------------------|-----------:|---------------:|-----------------------------:|-------------:|
+| `Как выбрать тариф ЖКХ в 2026 году: советы и примеры`                                                                |         51 | 104.62&nbsp;ns |               218.02&nbsp;ns |   320&nbsp;B |
+| `КАК ВЫБРАТЬ ТАРИФ ЖКХ В 2026 ГОДУ: СОВЕТЫ И ПРИМЕРЫ`                                                                |         51 | 123.62&nbsp;ns |               327.82&nbsp;ns |   320&nbsp;B |
+| `Архив ЮРИДИЧЕСКИЙ отдел ЖКХ Щёлково ОХРАНА ТРУДА Счета и ПЛАТЁЖ за Январь–Июнь 2026 (Шаблоны ЦЕНЫ v2) ИТОГОВЫЙ.zip` |        114 | 304.44&nbsp;ns |               717.22&nbsp;ns |   600&nbsp;B |
+| `How to choose a utility tariff in 2026: tips and examples`                                                          |         57 |  18.78&nbsp;ns |                24.53&nbsp;ns |     0&nbsp;B |
+| The full text of the novel "War and Peace"                                                                           |  3,606,380 |  15.07&nbsp;ms |                20.32&nbsp;ms | 14.9&nbsp;MB |
 
 To run the benchmarks yourself:
 
