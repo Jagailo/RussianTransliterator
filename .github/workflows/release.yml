@@ -47,8 +47,9 @@ jobs:
           user: Jagailo
 
       # The .snupkg next to the .nupkg is pushed automatically
+      # On Windows dotnet nuget push expands the wildcard only with a backslash
       - name: Push to NuGet
-        run: dotnet nuget push artifacts/*.nupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push artifacts\*.nupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
       - name: Attach packages to the release
         env:
