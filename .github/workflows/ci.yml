@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            test-args: ''
+          # .NET Framework tests can only run on Windows
+          - os: ubuntu-latest
+            test-args: --framework net10.0
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet build RussianTransliterator.slnx -c Release
+
+      - name: Test
+        run: dotnet test --solution RussianTransliterator.slnx -c Release --no-build ${{ matrix.test-args }}
+
+      - name: Pack
+        if: runner.os == 'Windows'
+        run: dotnet pack src/RussianTransliterator/RussianTransliterator.csproj -c Release --no-build -o artifacts
+
+      - uses: actions/upload-artifact@v7
+        if: runner.os == 'Windows'
+        with:
+          name: packages
+          path: artifacts/

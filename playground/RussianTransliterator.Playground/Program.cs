@@ -1,4 +1,5 @@
 using System;
+using TextCopy;
 
 namespace RussianTransliteration.Playground
 {
@@ -17,7 +18,9 @@ namespace RussianTransliteration.Playground
                     break;
                 }
 
-                Console.WriteLine($"Result: {input.ToLatin()}");
+                var result = input.ToLatin();
+                ClipboardService.SetText(result);
+                Console.WriteLine($"Result: {result}");
                 Console.WriteLine();
             }
         }

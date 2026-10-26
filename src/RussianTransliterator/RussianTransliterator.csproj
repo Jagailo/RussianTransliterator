@@ -14,8 +14,9 @@
     <IsPackable>true</IsPackable>
     <PackageId>RussianTransliterator</PackageId>
     <Product>RussianTransliterator</Product>
-    <Description>Library for transliterating Cyrillic to Latin. Only Russian language is supported.</Description>
-    <PackageTags>transliterator translit transliteration cyrillic slavic russian</PackageTags>
+    <Description>Lightweight library for transliterating Russian Cyrillic text to Latin with correct letter case. No dependencies.</Description>
+    <PackageTags>russian cyrillic latin cyrillic-to-latin transliteration transliterator translit romanization</PackageTags>
+    <PackageReleaseNotes>https://github.com/Jagailo/RussianTransliterator/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageLicenseExpression>MIT-0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Jagailo/RussianTransliterator</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>

@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  DOTNET_NOLOGO: true
+  TAG: ${{ github.event.release.tag_name }}
+
+jobs:
+  publish:
+    name: Publish to NuGet
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Check that the tag matches the project version
+        run: |
+          $version = dotnet msbuild src/RussianTransliterator/RussianTransliterator.csproj -getProperty:Version
+          if ("v$version" -ne $env:TAG) {
+            Write-Error "Tag $env:TAG does not match the project version $version (expected v$version)."
+            exit 1
+          }
+
+      - name: Build
+        run: dotnet build RussianTransliterator.slnx -c Release
+
+      - name: Test
+        run: dotnet test --solution RussianTransliterator.slnx -c Release --no-build
+
+      - name: Pack
+        run: dotnet pack src/RussianTransliterator/RussianTransliterator.csproj -c Release --no-build -o artifacts
+
+      - uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: Jagailo
+
+      # The .snupkg next to the .nupkg is pushed automatically
+      - name: Push to NuGet
+        run: dotnet nuget push artifacts/*.nupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Attach packages to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload $env:TAG (Get-ChildItem artifacts).FullName --clobber
